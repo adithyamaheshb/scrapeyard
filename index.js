@@ -1,5 +1,4 @@
-import { getHTML, getTwitterFollowers, getInstagramFollowersviaAPI, getInstagramFollowersviaCheerio } from './lib/scraper';
-import { promises } from 'fs';
+import { getHTML, getTwitterFollowers, getInstagramCount, getTwitterCount, getInstagramFollowersviaCheerio } from './lib/scraper';
 
 async function go() {
     // const htmlTwitter = await getHTML('https://twitter.com/adithyamaheshb');
@@ -13,15 +12,18 @@ async function go() {
     // const instagramFollowersviaCheerio = await getInstagramFollowersviaCheerio(htmlInstagram);
     // console.log(`You have ${instagramFollowersviaCheerio} Instagram followers`);
 
-    const twitterPromise = getHTML('https://twitter.com/adithyamaheshb');
-    const instagramPromise = getHTML('https://instagram.com/adithyamaheshb');
+    // const twitterPromise = getHTML('https://twitter.com/adithyamaheshb');
+    // const instagramPromise = getHTML('https://instagram.com/adithyamaheshb');
 
-    const [ twitterHTML, instagramHTML ] = await Promise.all([twitterPromise, instagramPromise]);
+    // const [ twitterHTML, instagramHTML ] = await Promise.all([twitterPromise, instagramPromise]);
 
-    const twitterCount = await getTwitterFollowers(twitterHTML);
-    const instagramCount = await getInstagramFollowersviaCheerio(instagramHTML);
+    // const twitterCount = await getTwitterFollowers(twitterHTML);
+    // const instagramCount = await getInstagramFollowersviaCheerio(instagramHTML);
 
-    console.log(`You have ${twitterCount} followers on Twitter and ${instagramCount} followers on Instagram`);
+    // console.log(`You have ${twitterCount} followers on Twitter and ${instagramCount} followers on Instagram`);
+
+    const [iCount, tCount] = await Promise.all([ getInstagramCount(), getTwitterCount() ]);
+    console.log(iCount, tCount);
 }
 
 go();
