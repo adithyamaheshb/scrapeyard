@@ -1,29 +1,18 @@
-import { getHTML, getTwitterFollowers, getInstagramCount, getTwitterCount, getInstagramFollowersviaCheerio } from './lib/scraper';
+import express from 'express';
+import { getInstagramCount, getTwitterCount } from './lib/scraper';
+import db from './lib/db';
 
-async function go() {
-    // const htmlTwitter = await getHTML('https://twitter.com/adithyamaheshb');
-    // const twitterFollowers = await getTwitterFollowers(htmlTwitter);
-    // console.log(`You have ${twitterFollowers} twitter followers`);
+const app = express();
 
-    // const instagramFollowersviaAPI = await getInstagramFollowersviaAPI('adithyamaheshb');
-    // console.log(`You have ${instagramFollowersviaAPI} instagram followers`);
+console.log(db());
 
-    // const htmlInstagram = await getHTML('https://instagram.com/adithyamaheshb');
-    // const instagramFollowersviaCheerio = await getInstagramFollowersviaCheerio(htmlInstagram);
-    // console.log(`You have ${instagramFollowersviaCheerio} Instagram followers`);
-
-    // const twitterPromise = getHTML('https://twitter.com/adithyamaheshb');
-    // const instagramPromise = getHTML('https://instagram.com/adithyamaheshb');
-
-    // const [ twitterHTML, instagramHTML ] = await Promise.all([twitterPromise, instagramPromise]);
-
-    // const twitterCount = await getTwitterFollowers(twitterHTML);
-    // const instagramCount = await getInstagramFollowersviaCheerio(instagramHTML);
-
-    // console.log(`You have ${twitterCount} followers on Twitter and ${instagramCount} followers on Instagram`);
-
+app.get('/scrape', async (req, res, next) => {
+    console.log('Scraping!');
     const [iCount, tCount] = await Promise.all([ getInstagramCount(), getTwitterCount() ]);
     console.log(iCount, tCount);
-}
+    res.json({ iCount, tCount });
+});
 
-go();
+app.listen(9672, () => {
+    console.log(`Example App is running on port 9672`);
+})
