@@ -1,13 +1,12 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "Frontend App forscrapeyard",
+  "description": "Frontend App for scrapeyard",
   "main": "index.js",
   "repository": "https://github.com/adithyamaheshb/scrapeyard",
   "author": "Adithya Mahesh Bariki",
   "license": "MIT",
   "dependencies": {
-    "date-fns": "^2.8.1",
     "next": "^9.1.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
@@ -16,5 +15,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next"
+  },
+  "devDependencies": {
+    "date-fns": "^2.11.1"
   }
 }

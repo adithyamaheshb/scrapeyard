@@ -3,7 +3,9 @@ import cheerio from "cheerio";
 import db from "./db";
 
 async function getHTML(url) {
-  const { data: html } = await axios.get(url);
+  const {
+    data: html
+  } = await axios.get(url);
   return html;
 }
 
@@ -16,7 +18,9 @@ async function getTwitterFollowers(html) {
 
 //Instagram Followers via API call
 async function getInstagramFollowersviaAPI(username = "adithyamaheshb") {
-  const { data } = await axios.get(
+  const {
+    data
+  } = await axios.get(
     `https://www.instagram.com/${username}/?__a=1`
   );
   const followers = data.graphql.user.edge_followed_by.count;
@@ -36,7 +40,7 @@ async function getInstagramFollowersviaCheerio(html) {
 }
 
 async function getInstagramCount() {
-  const htmlInstagram = await getHTML("https://instagram.com/wesbos");
+  const htmlInstagram = await getHTML("https://instagram.com/adithyamaheshb");
   const instagramFollowersviaCheerio = await getInstagramFollowersviaCheerio(
     htmlInstagram
   );
@@ -44,7 +48,7 @@ async function getInstagramCount() {
 }
 
 async function getTwitterCount() {
-  const htmlTwitter = await getHTML("https://twitter.com/wesbos");
+  const htmlTwitter = await getHTML("https://twitter.com/adithyamaheshb");
   const twitterFollowers = await getTwitterFollowers(htmlTwitter);
   return twitterFollowers;
 }
