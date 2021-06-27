@@ -3,25 +3,37 @@ import { ScrapeProvider } from "./ScrapeContext";
 
 // Custom Hook
 function useScrapes() {
-  const [scrapes, setScrapes] = useState({ twitter: [], instagram: [] });
+  //Initial State inside our hook
+  const [scrapes, setScrapes] = useState({
+    twitter: [],
+    instagram: [],
+  });
 
-  useEffect(function() {
-    (async () => {
-      console.log("Mounting Or Updating");
-      const res = await fetch("http://localhost:9672/data");
-      const data = await res.json();
-      console.warn(data);
-      setScrapes(data);
-    })();
+  //fetch function
+  async function fetchScrapes() {
+    const res = await fetch("http://localhost:9672/data");
+    const data = await res.json();
+    setScrapes(data);
+  }
+
+  useEffect(() => {
+    fetchScrapes();
   }, []);
 
-  return scrapes;
+  return {
+    scrapes,
+    fetchScrapes,
+  };
 }
 
 export default function Page({ children }) {
   const scrapes = useScrapes();
   return (
-    <ScrapeProvider value={{ scrapes }}>
+    <ScrapeProvider
+      value={{
+        scrapes,
+      }}
+    >
       <div className="page"> {children} </div>{" "}
     </ScrapeProvider>
   );

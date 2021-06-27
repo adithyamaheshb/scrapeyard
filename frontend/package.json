@@ -9,7 +9,8 @@
   "dependencies": {
     "next": "^9.1.6",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "recharts": "^1.8.5"
   },
   "scripts": {
     "dev": "next dev",
